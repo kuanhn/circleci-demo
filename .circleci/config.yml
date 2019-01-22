@@ -26,6 +26,10 @@ jobs:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn package
+
+      - test:
+          override:
+            - bash ./circleci/analyze-sonarqube.sh
       
       - store_test_results:
           path: target/surefire-reports
