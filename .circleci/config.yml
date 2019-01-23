@@ -15,10 +15,6 @@ jobs:
 
       - checkout
       
-      - run: echo "mvn sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_LOGIN}"
-      
-      - run: mvn sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_LOGIN}
-      
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
@@ -30,6 +26,8 @@ jobs:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn package
+      
+      - run: mvn sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_LOGIN}      
       
       - store_test_results:
           path: target/surefire-reports
