@@ -27,6 +27,8 @@ jobs:
       
       - run: mvn package
 
+      - run: mvn -v
+
       - run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.0.1:sonar \
              -Dsonar.projectKey="${PROJECT_KEY}" \
              -Dsonar.organization="${ORGANIZATION}" \
