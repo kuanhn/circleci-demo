@@ -15,17 +15,17 @@ jobs:
 
       - checkout
       
-      - restore_cache:
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      # - restore_cache:
+          # key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
-      - run: mvn dependency:go-offline
+      # - run: mvn dependency:go-offline
       
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      # - save_cache:
+      #     paths:
+      #       - ~/.m2
+      #     key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
-      - run: mvn package
+      # - run: mvn package
       
       - run: 
           name: Get Github pull request
@@ -34,10 +34,10 @@ jobs:
             echo 'export PR_NUMBER=`echo "${CI_PULL_REQUEST}" | sed -e 's/.*\///g'`' >> $BASH_ENV
             echo ${PR_NUMBER}
 
-      - run: mvn sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_LOGIN}      
+      # - run: mvn sonar:sonar -Dsonar.projectKey=${PROJECT_KEY} -Dsonar.organization=${ORGANIZATION} -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_LOGIN}      
       
-      - store_test_results:
-          path: target/surefire-reports
+      # - store_test_results:
+      #     path: target/surefire-reports
       
-      - store_artifacts:
-          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+      # - store_artifacts:
+          # path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
